@@ -1,0 +1,56 @@
+.page_404 {
+  padding: 40px 0;
+  background: #fff;
+  font-family: "Arvo", serif;
+  width: 1270px; /* Thêm chiều rộng cho phần tử page_404 */
+  margin: 0 auto; /* Canh giữa theo chiều ngang */
+}
+
+.four_zero_four_bg {
+  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  height: 400px;
+  background-position: center;
+}
+
+.four_zero_four_bg h1 {
+  font-size: 80px;
+}
+
+.four_zero_four_bg h3 {
+  font-size: 80px;
+}
+
+.link_404 {
+  color: #fff !important;
+  padding: 20px 30px;
+  background: #39ac31;
+  margin: 20px 0;
+  display: inline-block;
+}
+
+.contant_box_404 {
+  margin-top: -50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contant_box_404 h3 {
+  font-size: 50px;
+  margin: 0 auto;
+  padding: 0;
+}
+.contant_box_404 p {
+  padding-top: 0;
+  margin-top: 0;
+  font-size: 24px; /* Đặt kích thước phù hợp cho phần tử h3 và p */
+}
+.contant_box_404 a {
+  margin-top: 0;
+  font-size: 15px; /* Đặt kích thước phù hợp cho phần tử h3 và p */
+}
+.contant_box_404 h3,
+.contant_box_404 p,
+.contant_box_404 a {
+  font-family: "Arvo", serif;
+}
