@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes } from "./routes/index";
 import DefaultComponent from "./components/DefaultComponent/DefaultComponent";
@@ -14,17 +14,9 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setIsLoading(true);
-    const { storageData, decoded } = handleDecoded();
-    if (decoded?.id) {
-      handleGetDetailUser(decoded?.id, storageData);
-    }
-    setIsLoading(false);
-  }, []);
-
-  const handleDecoded = () => {
-    let storageData = user?.access_token || localStorage.getItem('access_token')
+  const handleDecoded = useCallback(() => {
+    let storageData =
+      user?.access_token || localStorage.getItem("access_token");
     let decoded = {};
 
     if (storageData && isJsonString(storageData) && !user?.access_token) {
@@ -32,14 +24,14 @@ const App = () => {
       decoded = jwtDecode(storageData);
     }
     return { decoded, storageData };
-  };
+  }, [user?.access_token]);
   UserService.axiosJWT.interceptors.request.use(
     async (config) => {
       const currentTime = new Date();
       const { decoded } = handleDecoded();
       let storageRefreshToken = localStorage.getItem("refresh_token");
       const refreshToken = JSON.parse(storageRefreshToken);
-    
+
       const decodedRefreshToken = jwtDecode(refreshToken);
       if (decoded?.exp < currentTime.getTime() / 1000) {
         if (decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
@@ -56,22 +48,33 @@ const App = () => {
     }
   );
 
-  const handleGetDetailUser = async (id, token) => {
-    if (id && token) {
-      let storageRefreshToken = localStorage.getItem("refresh_token");
-      const refreshToken = JSON.parse(storageRefreshToken);
-      const res = await UserService.getDetailsUser(id, token);
-      dispatch(
-        updateUserAction({
-          ...res?.data,
-          access_token: token,
-          refreshToken: refreshToken,
-        })
-      );
-    } else {
-      console.error("Missing id or token");
+  const handleGetDetailUser = useCallback(
+    async (id, token) => {
+      if (id && token) {
+        let storageRefreshToken = localStorage.getItem("refresh_token");
+        const refreshToken = JSON.parse(storageRefreshToken);
+        const res = await UserService.getDetailsUser(id, token);
+        dispatch(
+          updateUserAction({
+            ...res?.data,
+            access_token: token,
+            refreshToken: refreshToken,
+          })
+        );
+      } else {
+        console.error("Missing id or token");
+      }
+    },
+    [dispatch]
+  );
+  useEffect(() => {
+    setIsLoading(true);
+    const { storageData, decoded } = handleDecoded();
+    if (decoded?.id) {
+      handleGetDetailUser(decoded?.id, storageData);
     }
-  };
+    setIsLoading(false);
+  }, [handleDecoded, handleGetDetailUser]);
   return (
     <div>
       <LoadingComponent isLoading={isLoading}>

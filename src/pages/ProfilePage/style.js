@@ -10,7 +10,7 @@ export const WrapperContentProfile = styled.div`
   padding: 30px;
   border-radius: 10px;
   gap: 30px;
-  background-color:#fff;
+  background-color: #fff;
   box-shadow: 0 12px 12px #ccc;
 `;
 
@@ -37,4 +37,15 @@ export const WrapperUploadFile = styled(Upload)`
   & .ant-upload-list-item-container {
     display: none;
   }
+`;
+
+export const WrapperChangePassword = styled.div`
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0px 0px 0px 6px;
+  color: rgb(128, 128, 137);
+  display:flex;
+  align-items: center;
+  gap:10px;
+  padding:20px 20px 0px 20px;
 `;

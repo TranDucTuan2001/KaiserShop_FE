@@ -41,6 +41,16 @@ export const updateUser = async (id,data,access_token) => {
 
 };
 
+export const updateUserPassword = async (id,data,access_token) => {
+  const res = await axiosJWT.put(`${process.env.REACT_APP_API_URL}/user/update-user-password/${id}`,data,{
+    headers:{
+      token:`Bearer ${access_token}`
+    }
+  });
+  return res.data;
+
+};
+
 export const getAllUser = async (access_token) => {
   const res = await axiosJWT.get(`${process.env.REACT_APP_API_URL}/user/get-all`,{
     headers:{
