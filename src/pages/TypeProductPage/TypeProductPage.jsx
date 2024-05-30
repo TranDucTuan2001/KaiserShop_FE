@@ -1,18 +1,21 @@
 import React, { useCallback, useEffect, useState } from "react";
 import NavbarComponent from "../../components/NavbarComponent/NavbarComponent";
 import CardComponent from "../../components/CardComponent/CardComponent";
-import { Col, Row, Pagination } from "antd";
+import { Col, Row, Pagination, Breadcrumb } from "antd";
 import { WrapperNavbar, WrapperProduct } from "./style";
 import * as ProductService from "../../services/ProductService";
 import { useLocation } from "react-router-dom";
 import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 import { useSelector } from "react-redux";
 import { useDebounceHook } from "../../hooks/useDebounceHook";
+import { BreadcrumbItem } from "../ProductDetailsPage/style";
+import { useNavigate } from "react-router-dom";
 
 const TypeProductPage = () => {
   const searchProduct = useSelector((state) => state?.product?.search);
   const searchDebounce = useDebounceHook(searchProduct, 500);
   const location = useLocation();
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [panigate, setPanigate] = useState({
@@ -61,10 +64,25 @@ const TypeProductPage = () => {
     <LoadingComponent isLoading={loading}>
       <div style={{ background: "#f5f5fa", width: "100%" }}>
         <div style={{ width: "1270px", margin: "0 auto", height: "100%" }}>
+        <Breadcrumb
+        style={{paddingTop:'5px'}}
+          items={[
+            {
+              title: (
+                <BreadcrumbItem onClick={() => navigate("/")}>
+                  Trang chủ
+                </BreadcrumbItem>
+              ),
+            },
+            {
+              title: "Danh mục sản phẩm",
+            },
+          ]}
+        />
           <Row
             style={{
               flexWrap: "nowrap",
-              paddingTop: "10px",
+              // paddingTop: "10px",
               paddingBottom: "20px",
               height: "calc(100% - 20px)",
             }}

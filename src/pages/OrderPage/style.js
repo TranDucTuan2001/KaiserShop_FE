@@ -18,7 +18,8 @@ export const WrapperStyleHeaderDilivery = styled.div`
   padding: 9px 16px;
   border-radius: 4px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  // align-items: center;
   span {
     color: rgb(36, 36, 36);
     font-weight: 400;
@@ -118,4 +119,12 @@ export const WrapperChange = styled.span`
   color: rgb(10, 104, 255);
   cursor: pointer;
   font-weight: bold;
+`;
+export const WrapperTextShip = styled.div`
+  margin: 0px;
+  color: rgb(128, 128, 137);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 150%;
+  padding: 10px;
 `;

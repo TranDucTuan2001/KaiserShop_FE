@@ -6,7 +6,7 @@ import { addOrderProduct as addOrderProductAction } from "../../redux/slides/ord
 import HotDeal from "../../assets/images/hot.png";
 import Genuine from "../../assets/images/yes.png";
 import Change from "../../assets/images/back.png";
-import ImageProductSmall from "../../assets/images/imagesmall.webp";
+// import ImageProductSmall from "../../assets/images/testimg.jpg";
 import {
   WrapperAddressProduct,
   WrapperDiscount,
@@ -44,6 +44,7 @@ import { WrapperAddress, WrapperLocation } from "../../pages/PaymentPage/style";
 import { WrapperChange } from "../../pages/OrderPage/style";
 
 const ProductDetailsComponent = ({ idProduct }) => {
+  
   const location = useLocation();
   const dispatch = useDispatch();
   const [updateForm] = Form.useForm();
@@ -234,6 +235,19 @@ const ProductDetailsComponent = ({ idProduct }) => {
     }
   };
 
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const smallImages = [productDetais?.image,productDetais?.image1,productDetais?.image2,productDetais?.image3].filter(Boolean);;
+  useEffect(() => {
+    if (productDetais?.image) {
+      setSelectedImage(productDetais?.image);
+    }
+  }, [productDetais]);
+  const handleImageClick = (src, index) => {
+    setSelectedImage(src);
+    setActiveIndex(index);
+  };
+
   return (
     <LoadingComponent isLoading={isPending}>
       <Row
@@ -248,48 +262,26 @@ const ProductDetailsComponent = ({ idProduct }) => {
           style={{ borderRight: "1px solid #e5e5e5", paddingRight: "8px" }}
         >
           <Image
-            src={productDetais?.image}
+            src={selectedImage}
             alt="image product"
             preview={false}
           />
-          <Row style={{ paddingTop: "10px", justifyContent: "space-between" }}>
-            <WrapperStyleColImage span={4}>
-              <WrapperStyleImageSmall
-                src={ImageProductSmall}
-                alt="image small"
-              />
-            </WrapperStyleColImage>
-            <WrapperStyleColImage span={4}>
-              <WrapperStyleImageSmall
-                src={ImageProductSmall}
-                alt="image small"
-              />
-            </WrapperStyleColImage>
-            <WrapperStyleColImage span={4}>
-              <WrapperStyleImageSmall
-                src={ImageProductSmall}
-                alt="image small"
-              />
-            </WrapperStyleColImage>
-            <WrapperStyleColImage span={4}>
-              <WrapperStyleImageSmall
-                src={ImageProductSmall}
-                alt="image small"
-              />
-            </WrapperStyleColImage>
-            <WrapperStyleColImage span={4}>
-              <WrapperStyleImageSmall
-                src={ImageProductSmall}
-                alt="image small"
-              />
-            </WrapperStyleColImage>
-            <WrapperStyleColImage span={4}>
-              <WrapperStyleImageSmall
-                src={ImageProductSmall}
-                alt="image small"
-              />
-            </WrapperStyleColImage>
-          </Row>
+             <Row style={{ paddingTop: "10px", display: 'flex', gap: '10px' }}>
+        {smallImages.map((image, index) => (
+          <WrapperStyleColImage
+            key={index}
+            span={4}
+            active={index === activeIndex ? 'true' : undefined}
+
+            onClick={() => handleImageClick(image, index)}
+          >
+            <WrapperStyleImageSmall
+              src={image}
+              alt={`image small ${index + 1}`}
+            />
+          </WrapperStyleColImage>
+        ))}
+      </Row>
         </Col>
         <Col span={14} style={{ paddingLeft: "10px" }}>
           <div style={{ display: "flex", gap: "10px" }}>

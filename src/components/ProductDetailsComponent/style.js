@@ -5,6 +5,10 @@ export const WrapperStyleImageSmall = styled.img`
   width: 64px;
 `;
 export const WrapperStyleColImage = styled(Col)`
+  cursor: pointer;
+  border: ${(props) => (props.active ? "2px solid blue" : "none")};
+  box-shadow: ${(props) =>
+    props.active ? "0 0 10px rgba(0, 0, 255, 0.5)" : "none"};
   flex-basis: unset;
   display: flex;
 `;

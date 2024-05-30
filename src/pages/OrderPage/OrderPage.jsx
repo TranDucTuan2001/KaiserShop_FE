@@ -14,6 +14,7 @@ import {
   WrapperBody,
   WrapperTextPrice,
   WrapperChange,
+  WrapperTextShip,
 } from "./style";
 import {
   DeleteOutlined,
@@ -45,7 +46,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import StepComponent from "../../components/StepComponent/StepComponent";
 import { WrapperTitle } from "../MyOrderPage/style";
 import { WrapperAddress, WrapperLocation } from "../PaymentPage/style";
-
+import ship from "../../assets/images/ship.png";
 const OrderPage = () => {
   const navigate = useNavigate();
 
@@ -241,15 +242,15 @@ const OrderPage = () => {
   const itemsDelivery = [
     {
       title: "30.000 VND",
-      description: "Dưới 200.000 VND",
+      description: "Đơn hàng dưới 200.000 VND",
     },
     {
       title: "20.000 VND",
-      description: "Từ 200.000 VND đến dưới 500.000 VND",
+      description: "Đơn hàng từ 200.000 VND đến dưới 500.000 VND",
     },
     {
       title: "0 VND",
-      description: "Trên 500.000 VND",
+      description: "Đơn hàng trên 500.000 VND",
     },
   ];
 
@@ -260,6 +261,13 @@ const OrderPage = () => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <WrapperLeft>
             <WrapperStyleHeaderDilivery>
+              <div
+                style={{ display: "flex", alignItems: "center"}}
+              >
+                <WrapperTextShip>Phí giao hàng</WrapperTextShip>
+                <img src={ship} width={40} alt="Logo" />
+              </div>
+
               <StepComponent
                 items={itemsDelivery}
                 current={

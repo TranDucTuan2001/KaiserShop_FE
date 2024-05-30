@@ -40,6 +40,9 @@ const AdminProductComponent = () => {
     description: "",
     rating: "",
     image: "",
+    image1: "",
+    image2: "",
+    image3: "",
     countInStock: "",
     type: "",
     discount: "",
@@ -51,6 +54,9 @@ const AdminProductComponent = () => {
     description: "",
     rating: "",
     image: "",
+    image1: "",
+    image2: "",
+    image3: "",
     countInStock: "",
     type: "",
     discount: "",
@@ -67,6 +73,9 @@ const AdminProductComponent = () => {
         description,
         rating,
         image,
+        image1,
+        image2,
+        image3,
         countInStock,
         type,
         discount,
@@ -77,6 +86,9 @@ const AdminProductComponent = () => {
         description,
         rating,
         image,
+        image1,
+        image2,
+        image3,
         countInStock,
         type,
         discount,
@@ -132,6 +144,9 @@ const AdminProductComponent = () => {
         description: res?.data?.description,
         rating: res?.data?.rating,
         image: res?.data?.image,
+        image1: res?.data?.image1,
+        image2: res?.data?.image2,
+        image3: res?.data?.image3,
         countInStock: res?.data?.countInStock,
         type: res?.data?.type,
         discount: res?.data?.discount,
@@ -469,6 +484,9 @@ const AdminProductComponent = () => {
       description: "",
       rating: "",
       image: "",
+      image1: "",
+      image2: "",
+      image3: "",
       countInStock: "",
       type: "",
       discount: "",
@@ -513,6 +531,9 @@ const AdminProductComponent = () => {
       description: "",
       rating: "",
       image: "",
+      image1: "",
+      image2: "",
+      image3: "",
       countInStock: "",
       type: "",
       discount: "",
@@ -527,6 +548,9 @@ const AdminProductComponent = () => {
       description: "",
       rating: "",
       image: "",
+      image1: "",
+      image2: "",
+      image3: "",
       countInStock: "",
       type: "",
       discount: "",
@@ -550,6 +574,36 @@ const AdminProductComponent = () => {
       image: file.preview,
     });
   };
+  const handleOnChangeImage1 = async ({ fileList }) => {
+    const file = fileList[0];
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setStateProduct({
+      ...stateProduct,
+      image1: file.preview,
+    });
+  };
+  const handleOnChangeImage2 = async ({ fileList }) => {
+    const file = fileList[0];
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setStateProduct({
+      ...stateProduct,
+      image2: file.preview,
+    });
+  };
+  const handleOnChangeImage3 = async ({ fileList }) => {
+    const file = fileList[0];
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setStateProduct({
+      ...stateProduct,
+      image3: file.preview,
+    });
+  };
 
   const handleOnChangeAvatarDetails = async ({ fileList }) => {
     const file = fileList[0];
@@ -559,6 +613,36 @@ const AdminProductComponent = () => {
     setStateProductDetails({
       ...stateProductDetails,
       image: file.preview,
+    });
+  };
+  const handleOnChangeImageProduct1 = async ({ fileList }) => {
+    const file = fileList[0];
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setStateProductDetails({
+      ...stateProductDetails,
+      image1: file.preview,
+    });
+  };
+  const handleOnChangeImageProduct2 = async ({ fileList }) => {
+    const file = fileList[0];
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setStateProductDetails({
+      ...stateProductDetails,
+      image2: file.preview,
+    });
+  };
+  const handleOnChangeImageProduct3 = async ({ fileList }) => {
+    const file = fileList[0];
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setStateProductDetails({
+      ...stateProductDetails,
+      image3: file.preview,
     });
   };
   const handleOnchange = (e) => {
@@ -796,7 +880,7 @@ const AdminProductComponent = () => {
             </Form.Item>
 
             <Form.Item
-              label="Ảnh"
+              label="Ảnh chính"
               name="image"
               rules={[
                 {
@@ -815,7 +899,67 @@ const AdminProductComponent = () => {
                     style={{
                       height: "60px",
                       width: "60px",
-                      borderRadius: "50%",
+                      // borderRadius: "50%",
+                      objectFit: "cover",
+                      marginLeft: "10px",
+                    }}
+                    alt="avatar"
+                  />
+                )}
+              </div>
+            </Form.Item>
+            <Form.Item label="Ảnh phụ 1" name="image1">
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <WrapperUploadFile onChange={handleOnChangeImage1} maxCount={1}>
+                  <Button icon={<UploadOutlined />}>Select file</Button>
+                </WrapperUploadFile>
+                {stateProduct?.image1 && (
+                  <img
+                    src={stateProduct?.image1}
+                    style={{
+                      height: "60px",
+                      width: "60px",
+                      // borderRadius: "50%",
+                      objectFit: "cover",
+                      marginLeft: "10px",
+                    }}
+                    alt="avatar"
+                  />
+                )}
+              </div>
+            </Form.Item>
+            <Form.Item label="Ảnh phụ 2" name="image2">
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <WrapperUploadFile onChange={handleOnChangeImage2} maxCount={1}>
+                  <Button icon={<UploadOutlined />}>Select file</Button>
+                </WrapperUploadFile>
+                {stateProduct?.image2 && (
+                  <img
+                    src={stateProduct?.image2}
+                    style={{
+                      height: "60px",
+                      width: "60px",
+                      // borderRadius: "50%",
+                      objectFit: "cover",
+                      marginLeft: "10px",
+                    }}
+                    alt="avatar"
+                  />
+                )}
+              </div>
+            </Form.Item>
+            <Form.Item label="Ảnh phụ 3" name="image3">
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <WrapperUploadFile onChange={handleOnChangeImage3} maxCount={1}>
+                  <Button icon={<UploadOutlined />}>Select file</Button>
+                </WrapperUploadFile>
+                {stateProduct?.image3 && (
+                  <img
+                    src={stateProduct?.image3}
+                    style={{
+                      height: "60px",
+                      width: "60px",
+                      // borderRadius: "50%",
                       objectFit: "cover",
                       marginLeft: "10px",
                     }}
@@ -839,7 +983,7 @@ const AdminProductComponent = () => {
         </LoadingComponent>
       </ModalComponent>
       <DrawerComponent
-        forceRender 
+        forceRender
         title="Chi tiết sản phẩm"
         isOpen={isOpenDrawer}
         width="50%"
@@ -851,6 +995,9 @@ const AdminProductComponent = () => {
             description: "",
             rating: "",
             image: "",
+            image1: "",
+            image2: "",
+            image3: "",
             countInStock: "",
             type: "",
             discount: "",
@@ -991,12 +1138,117 @@ const AdminProductComponent = () => {
                     style={{
                       height: "60px",
                       width: "60px",
-                      borderRadius: "50%",
+                      // borderRadius: "50%",
                       objectFit: "cover",
                       marginLeft: "10px",
                     }}
                     alt="avatar"
                   />
+                )}
+              </div>
+            </Form.Item>
+            <Form.Item label="Ảnh Phụ 1" name="image1">
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <WrapperUploadFile
+                  onChange={handleOnChangeImageProduct1}
+                  maxCount={1}
+                >
+                  <Button icon={<UploadOutlined />}>Select file</Button>
+                </WrapperUploadFile>
+                {stateProductDetails?.image1 && (
+                  <>
+                    <img
+                      src={stateProductDetails?.image1}
+                      style={{
+                        height: "60px",
+                        width: "60px",
+                        // borderRadius: "50%",
+                        objectFit: "cover",
+                        marginLeft: "10px",
+                      }}
+                      alt="avatar"
+                    />
+                    <Button
+                      shape="circle"
+                      onClick={() =>
+                        setStateProductDetails({
+                          ...stateProductDetails,
+                          image1: "",
+                        })
+                      }
+                      icon={<DeleteTwoTone twoToneColor="red" />}
+                    />
+                  </>
+                )}
+              </div>
+            </Form.Item>
+            <Form.Item label="Ảnh Phụ 2" name="image2">
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <WrapperUploadFile
+                  onChange={handleOnChangeImageProduct2}
+                  maxCount={1}
+                >
+                  <Button icon={<UploadOutlined />}>Select file</Button>
+                </WrapperUploadFile>
+                {stateProductDetails?.image2 && (
+                  <>
+                    <img
+                      src={stateProductDetails?.image2}
+                      style={{
+                        height: "60px",
+                        width: "60px",
+                        // borderRadius: "50%",
+                        objectFit: "cover",
+                        marginLeft: "10px",
+                      }}
+                      alt="avatar"
+                    />
+                    <Button
+                      shape="circle"
+                      onClick={() =>
+                        setStateProductDetails({
+                          ...stateProductDetails,
+                          image2: "",
+                        })
+                      }
+                      icon={<DeleteTwoTone twoToneColor="red" />}
+                    />
+                  </>
+                )}
+              </div>
+            </Form.Item>
+            <Form.Item label="Ảnh Phụ 3" name="image3">
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <WrapperUploadFile
+                  onChange={handleOnChangeImageProduct3}
+                  maxCount={1}
+                >
+                  <Button icon={<UploadOutlined />}>Select file</Button>
+                </WrapperUploadFile>
+                {stateProductDetails?.image3 && (
+                  <>
+                    <img
+                      src={stateProductDetails?.image3}
+                      style={{
+                        height: "60px",
+                        width: "60px",
+                        // borderRadius: "50%",
+                        objectFit: "cover",
+                        marginLeft: "10px",
+                      }}
+                      alt="avatar"
+                    />
+                    <Button
+                      shape="circle"
+                      onClick={() =>
+                        setStateProductDetails({
+                          ...stateProductDetails,
+                          image3: "",
+                        })
+                      }
+                      icon={<DeleteTwoTone twoToneColor="red" />}
+                    />
+                  </>
                 )}
               </div>
             </Form.Item>
