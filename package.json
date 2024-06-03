@@ -56,5 +56,5 @@
   "devDependencies": {
     "dotenv": "^16.4.5"
   },
-  "proxy": "http://localhost:3001/api"
+  "proxy": "https://server-kaiser-shop.onrender.com"
 }
