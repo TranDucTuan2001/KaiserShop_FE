@@ -44,7 +44,6 @@ import { WrapperAddress, WrapperLocation } from "../../pages/PaymentPage/style";
 import { WrapperChange } from "../../pages/OrderPage/style";
 
 const ProductDetailsComponent = ({ idProduct }) => {
-  
   const location = useLocation();
   const dispatch = useDispatch();
   const [updateForm] = Form.useForm();
@@ -237,7 +236,12 @@ const ProductDetailsComponent = ({ idProduct }) => {
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const smallImages = [productDetais?.image,productDetais?.image1,productDetais?.image2,productDetais?.image3].filter(Boolean);;
+  const smallImages = [
+    productDetais?.image,
+    productDetais?.image1,
+    productDetais?.image2,
+    productDetais?.image3,
+  ].filter(Boolean);
   useEffect(() => {
     if (productDetais?.image) {
       setSelectedImage(productDetais?.image);
@@ -261,27 +265,22 @@ const ProductDetailsComponent = ({ idProduct }) => {
           span={10}
           style={{ borderRight: "1px solid #e5e5e5", paddingRight: "8px" }}
         >
-          <Image
-            src={selectedImage}
-            alt="image product"
-            preview={false}
-          />
-             <Row style={{ paddingTop: "10px", display: 'flex', gap: '10px' }}>
-        {smallImages.map((image, index) => (
-          <WrapperStyleColImage
-            key={index}
-            span={4}
-            active={index === activeIndex ? 'true' : undefined}
-
-            onClick={() => handleImageClick(image, index)}
-          >
-            <WrapperStyleImageSmall
-              src={image}
-              alt={`image small ${index + 1}`}
-            />
-          </WrapperStyleColImage>
-        ))}
-      </Row>
+          <Image src={selectedImage} alt="image product" preview={false} />
+          <Row style={{ paddingTop: "10px", display: "flex", gap: "10px" }}>
+            {smallImages.map((image, index) => (
+              <WrapperStyleColImage
+                key={index}
+                span={4}
+                active={index === activeIndex ? "true" : undefined}
+                onClick={() => handleImageClick(image, index)}
+              >
+                <WrapperStyleImageSmall
+                  src={image}
+                  alt={`image small ${index + 1}`}
+                />
+              </WrapperStyleColImage>
+            ))}
+          </Row>
         </Col>
         <Col span={14} style={{ paddingLeft: "10px" }}>
           <div style={{ display: "flex", gap: "10px" }}>
@@ -327,7 +326,8 @@ const ProductDetailsComponent = ({ idProduct }) => {
               alt="Description"
             />
           </WrapperPriceProduct>
-          
+
+          {user?.id && (
             <WrapperAddressProduct>
               <div>
                 <WrapperLocation>
@@ -335,20 +335,20 @@ const ProductDetailsComponent = ({ idProduct }) => {
                   <EnvironmentOutlined /> Giao đến:{" "}
                 </WrapperLocation>
                 {user?.address && (
-                    <WrapperAddress>{`${user?.address}, ${user?.city}`}</WrapperAddress>
-                  )}
-                  {user?.address ? (
-                    <WrapperChange onClick={handleChangeAdress}>
-                      Thay đổi
-                    </WrapperChange>
-                  ) : (
-                    <WrapperChange onClick={handleChangeAdress}>
-                      Cập nhật
-                    </WrapperChange>
-                  )}
+                  <WrapperAddress>{`${user?.address}, ${user?.city}`}</WrapperAddress>
+                )}
+                {user?.address ? (
+                  <WrapperChange onClick={handleChangeAdress}>
+                    Thay đổi
+                  </WrapperChange>
+                ) : (
+                  <WrapperChange onClick={handleChangeAdress}>
+                    Cập nhật
+                  </WrapperChange>
+                )}
               </div>
             </WrapperAddressProduct>
-       
+          )}
 
           <LikeButtonComponent
             dataHref={
