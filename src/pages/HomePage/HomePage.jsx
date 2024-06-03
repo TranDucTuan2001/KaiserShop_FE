@@ -42,7 +42,11 @@ const HomePage = () => {
     setActiveType(type);
   };
 
-  const { isPending, data: products } = useQuery({
+  const {
+    isPending,
+    data: products,
+    isPlaceholderData,
+  } = useQuery({
     queryKey: ["products", limit, searchDebounce],
     queryFn: fetchProductAll,
     retry: 3,
@@ -111,7 +115,7 @@ const HomePage = () => {
               }}
             >
               <WrapperButtonMore
-                textButton="Xem thêm"
+                textButton={isPlaceholderData ? "Đang tải..." : "Xem thêm"}
                 type="outline"
                 styleButton={{
                   border: "1px solid rgb(11,116,229)",
@@ -126,6 +130,7 @@ const HomePage = () => {
                   borderRadius: "4px",
                   marginBottom: "15px",
                   pointerEvents:
+                    isPlaceholderData ||
                     products?.total === products?.data?.length ||
                     products?.totalPage === 1
                       ? "none"
