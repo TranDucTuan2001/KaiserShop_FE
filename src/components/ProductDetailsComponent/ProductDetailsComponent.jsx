@@ -265,7 +265,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
           span={10}
           style={{ borderRight: "1px solid #e5e5e5", paddingRight: "8px" }}
         >
-          <Image src={selectedImage} alt="image product" preview={false} />
+          <Image src={selectedImage} alt="image product" preview={false} style={{height:'450px'}} />
           <Row style={{ paddingTop: "10px", display: "flex", gap: "10px" }}>
             {smallImages.map((image, index) => (
               <WrapperStyleColImage
