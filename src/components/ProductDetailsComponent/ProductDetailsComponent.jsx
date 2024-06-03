@@ -262,7 +262,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
         }}
       >
         <Col
-          span={10}
+          span={12}
           style={{ borderRight: "1px solid #e5e5e5", paddingRight: "8px" }}
         >
           <Image src={selectedImage} alt="image product" preview={false} style={{height:'450px'}} />
@@ -282,7 +282,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
             ))}
           </Row>
         </Col>
-        <Col span={14} style={{ paddingLeft: "10px" }}>
+        <Col span={12} style={{ paddingLeft: "10px" }}>
           <div style={{ display: "flex", gap: "10px" }}>
             <img
               style={{ height: "23px", margin: "0", opacity: "1" }}

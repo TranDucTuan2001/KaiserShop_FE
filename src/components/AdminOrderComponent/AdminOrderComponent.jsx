@@ -269,12 +269,14 @@ const AdminOrderComponent = () => {
     {
       title: "Địa chỉ/thành phố",
       dataIndex: "address",
+      width: "130px",
       render: (text, record) => `${record.address}, ${record.city}`,
     },
 
     {
       title: "Sản phẩm",
       dataIndex: "itemOrder",
+      width: "200px",
       render: (text) => (
         <ul style={{ listStyleType: "none", padding: 0 }}>
           {text.split("\n").map((item, index) => (
