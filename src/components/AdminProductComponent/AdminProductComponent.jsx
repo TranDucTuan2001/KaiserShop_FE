@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import ModalComponent from "../ModalComponent/ModalComponent";
 import Highlighter from "react-highlight-words";
 import { WrapperTitle } from "../../pages/MyOrderPage/style";
+import TextArea from "antd/es/input/TextArea";
 
 const AdminProductComponent = () => {
   const user = useSelector((state) => state?.user);
@@ -855,10 +856,11 @@ const AdminProductComponent = () => {
               />
             </Form.Item>
             <Form.Item label="Mô tả" name="description">
-              <InputComponent
+              <TextArea
                 value={stateProduct?.description}
                 onChange={handleOnchange}
                 name="description"
+                rows={4}
               />
             </Form.Item>
             <Form.Item
@@ -1092,10 +1094,11 @@ const AdminProductComponent = () => {
               />
             </Form.Item>
             <Form.Item label="Mô tả" name="description">
-              <InputComponent
+              <TextArea
                 value={stateProductDetails?.description}
                 onChange={handleOnchangeDetails}
                 name="description"
+                rows={4}
               />
             </Form.Item>
             <Form.Item

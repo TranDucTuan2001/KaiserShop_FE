@@ -87,3 +87,42 @@ export const WrapperDiscount = styled.div`
   width: fit-content;
   height: fit-content;
 `;
+export const WrapperDescription = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: rgb(39, 39, 42);
+`;
+export const WrapperDescriptionText = styled.p`
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 13px;
+  line-height: 1.7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  max-height: ${(props) => (props.isExpanded ? 'none' : '100px')}; 
+  position: relative;
+
+  &:after {
+    font-size: 13px;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: ${(props) => (props.isExpanded ? '0' : '40px')}; /* Điều chỉnh chiều cao của lớp mờ */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  }
+`;
+
+export const WrapperDescriptionArea = styled.div`
+  margin-top: 20px;
+  border-top: 1px solid rgb(229, 229, 229);
+`;
+export const ShowMoreButton = styled.button`
+background-color: transparent;
+border: none;
+color: rgb(11, 116, 229);
+font-style: normal;
+cursor: pointer;
+`;

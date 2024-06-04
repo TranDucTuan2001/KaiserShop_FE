@@ -8,7 +8,11 @@ import Genuine from "../../assets/images/yes.png";
 import Change from "../../assets/images/back.png";
 // import ImageProductSmall from "../../assets/images/testimg.jpg";
 import {
+  ShowMoreButton,
   WrapperAddressProduct,
+  WrapperDescription,
+  WrapperDescriptionArea,
+  WrapperDescriptionText,
   WrapperDiscount,
   WrapperInputNmber,
   WrapperPriceProduct,
@@ -49,6 +53,13 @@ const ProductDetailsComponent = ({ idProduct }) => {
   const [updateForm] = Form.useForm();
   const [isOpenModalUpdateInfo, setIsOpenModalUpdateInfo] = useState(false);
   const user = useSelector((state) => state?.user);
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   const [stateUserDetails, setStateUserDetails] = useState({
     name: "",
     phone: "",
@@ -177,22 +188,22 @@ const ProductDetailsComponent = ({ idProduct }) => {
     }
   };
 
-  const { isPending, data: productDetais } = useQuery({
+  const { isPending, data: productDetails } = useQuery({
     queryKey: ["product-details", idProduct],
     queryFn: fetchGetDetailsProduct,
     enabled: !!idProduct,
   });
   const orderRedux = order?.orderItems?.find(
-    (item) => item.product === productDetais?._id
+    (item) => item.product === productDetails?._id
   );
   useEffect(() => {
-    if (productDetais?.countInStock === 0) {
+    if (productDetails?.countInStock === 0) {
       setOutOfStock(true);
     }
-  }, [orderRedux, productDetais?.countInStock]);
+  }, [orderRedux, productDetails?.countInStock]);
   useEffect(() => {
     const orderRedux = order?.orderItems?.find(
-      (item) => item.product === productDetais?._id
+      (item) => item.product === productDetails?._id
     );
     if (
       orderRedux?.amount + numProduct <= orderRedux?.countInStock ||
@@ -202,28 +213,28 @@ const ProductDetailsComponent = ({ idProduct }) => {
     } else {
       setErrorLimitOrder(true);
     }
-  }, [numProduct, order?.orderItems, productDetais?._id]);
+  }, [numProduct, order?.orderItems, productDetails?._id]);
   const handleAddOrderProduct = () => {
     if (!user?.id) {
       navigate("/sign-in", { state: location?.pathname });
     } else {
       const orderRedux = order?.orderItems?.find(
-        (item) => item.product === productDetais?._id
+        (item) => item.product === productDetails?._id
       );
       if (
         orderRedux?.amount + numProduct <= orderRedux?.countInStock ||
-        (!orderRedux && productDetais?.countInStock > 0)
+        (!orderRedux && productDetails?.countInStock > 0)
       ) {
         dispatch(
           addOrderProductAction({
             orderItem: {
-              name: productDetais?.name,
+              name: productDetails?.name,
               amount: numProduct,
-              image: productDetais?.image,
-              price: productDetais?.price,
-              product: productDetais?._id,
-              discount: productDetais?.discount,
-              countInStock: productDetais?.countInStock,
+              image: productDetails?.image,
+              price: productDetails?.price,
+              product: productDetails?._id,
+              discount: productDetails?.discount,
+              countInStock: productDetails?.countInStock,
             },
           })
         );
@@ -237,16 +248,16 @@ const ProductDetailsComponent = ({ idProduct }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const smallImages = [
-    productDetais?.image,
-    productDetais?.image1,
-    productDetais?.image2,
-    productDetais?.image3,
+    productDetails?.image,
+    productDetails?.image1,
+    productDetails?.image2,
+    productDetails?.image3,
   ].filter(Boolean);
   useEffect(() => {
-    if (productDetais?.image) {
-      setSelectedImage(productDetais?.image);
+    if (productDetails?.image) {
+      setSelectedImage(productDetails?.image);
     }
-  }, [productDetais]);
+  }, [productDetails]);
   const handleImageClick = (src, index) => {
     setSelectedImage(src);
     setActiveIndex(index);
@@ -265,7 +276,12 @@ const ProductDetailsComponent = ({ idProduct }) => {
           span={12}
           style={{ borderRight: "1px solid #e5e5e5", paddingRight: "8px" }}
         >
-          <Image src={selectedImage} alt="image product" preview={false} style={{height:'450px'}} />
+          <Image
+            src={selectedImage}
+            alt="image product"
+            preview={false}
+            style={{ height: "450px" }}
+          />
           <Row style={{ paddingTop: "10px", display: "flex", gap: "10px" }}>
             {smallImages.map((image, index) => (
               <WrapperStyleColImage
@@ -296,28 +312,28 @@ const ProductDetailsComponent = ({ idProduct }) => {
             />
           </div>
           <WrapperStyleNameProduct>
-            {productDetais?.name}
+            {productDetails?.name}
           </WrapperStyleNameProduct>
           <div>
-            <span style={{ fontSize: "16px" }}>{productDetais?.rating} </span>
+            <span style={{ fontSize: "16px" }}>{productDetails?.rating} </span>
             <Rate
               style={{ fontSize: "15px" }}
               allowHalf
               disabled
-              value={productDetais?.rating}
+              value={productDetails?.rating}
             />
             <WrapperStyleTextSell>
               {" "}
-              | Đã bán {productDetais?.selled}
+              | Đã bán {productDetails?.selled}
             </WrapperStyleTextSell>
           </div>
           <WrapperPriceProduct>
             <WrapperPriceTextProduct>
-              {convertPrice(productDetais?.price ?? 0)}
+              {convertPrice(productDetails?.price ?? 0)}
             </WrapperPriceTextProduct>
-            {productDetais?.discount !== 0 && (
+            {productDetails?.discount !== 0 && (
               <WrapperDiscount>{`-${
-                productDetais?.discount ?? 0
+                productDetails?.discount ?? 0
               }%`}</WrapperDiscount>
             )}
             <img
@@ -382,7 +398,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                 onChange={onChange}
                 value={numProduct}
                 defaultValue={1}
-                max={productDetais?.countInStock}
+                max={productDetails?.countInStock}
                 min={1}
                 size="small"
               />
@@ -396,7 +412,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                   !outOfStock &&
                   handleChangeCount(
                     "increase",
-                    numProduct === productDetais?.countInStock
+                    numProduct === productDetails?.countInStock
                   )
                 }
               >
@@ -448,6 +464,17 @@ const ProductDetailsComponent = ({ idProduct }) => {
               ></ButtonComponent>
             </div>
           </div>
+         {productDetails?.description &&(
+           <WrapperDescriptionArea>
+           <WrapperDescription>Mô tả sản phẩm</WrapperDescription>
+           <WrapperDescriptionText isExpanded={isExpanded}>
+             {productDetails?.description}
+           </WrapperDescriptionText>
+           <ShowMoreButton onClick={toggleExpand}>
+             {isExpanded ? "Thu gọn" : "Xem thêm"}
+           </ShowMoreButton>
+         </WrapperDescriptionArea>
+         )}
         </Col>
         <CommentComponent
           dataHref={
