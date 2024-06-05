@@ -117,7 +117,7 @@ const HeaderComponent = ({ isHiddenSearch, isHiddenCard }) => {
               size="lager"
               bordered={false}
               textbutton="Tìm kiếm"
-              placeholder="input search text"
+              placeholder="Bạn tìm gì..."
               onChange={onSearch}
             />
           </Col>
