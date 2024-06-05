@@ -44,8 +44,12 @@ export const renderOptions = (arr) => {
 
 export const convertPrice = (price) => {
   try {
-    const result = price?.toLocaleString().replaceAll(",", ".");
-    return `${result} VND`;
+    // const result = price?.toLocaleString().replaceAll(",", ".");
+    // return `${result} VND`;
+    return Intl.NumberFormat("de-DE", {
+      style: "currency",
+      currency: "VND",
+    }).format(price);
   } catch (error) {
     return null;
   }
@@ -60,9 +64,9 @@ export const initFacebookSDK = () => {
     window.FB.init({
       appId: process.env.REACT_APP_FACEBOOK,
       cookie: true,
-    
-      xfbml: true, 
-      version: "v19.0", 
+
+      xfbml: true,
+      version: "v19.0",
     });
   };
 

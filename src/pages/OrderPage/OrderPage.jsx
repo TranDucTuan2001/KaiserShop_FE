@@ -241,16 +241,16 @@ const OrderPage = () => {
 
   const itemsDelivery = [
     {
-      title: "30.000 VND",
-      description: "Đơn hàng dưới 200.000 VND",
+      title: convertPrice(30000),
+      description: `Đơn hàng dưới ${convertPrice(200000)}`,
     },
     {
-      title: "20.000 VND",
-      description: "Đơn hàng từ 200.000 VND đến dưới 500.000 VND",
+      title: convertPrice(20000),
+      description: `Đơn hàng từ ${convertPrice(200000)} đến dưới ${convertPrice(500000)}`,
     },
     {
-      title: "0 VND",
-      description: "Đơn hàng trên 500.000 VND",
+      title: convertPrice(0),
+      description: `Đơn hàng trên ${convertPrice(500000)}`,
     },
   ];
 
