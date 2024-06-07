@@ -3,6 +3,7 @@ import {
   StyleNameProduct,
   WrapperCardStyle,
   WrapperImageStyle,
+  WrapperPriceBefore,
   WrapperStyleTextSell,
 } from "./style";
 import {
@@ -27,6 +28,7 @@ const CardComponent = (props) => {
     discount,
     selled,
     id,
+    afterPrice,
   } = props;
   const navigate = useNavigate();
   const handleDetaisProduct = (id) => {
@@ -34,6 +36,7 @@ const CardComponent = (props) => {
       navigate(`/product-details/${id}`);
     }
   };
+
   return (
     <WrapperCardStyle
       hoverable
@@ -49,16 +52,9 @@ const CardComponent = (props) => {
       disabled={countInStock === 0}
     >
       <WrapperImageStyle src={logo} />
-      <StyleNameProduct
-        style={{
-          maxWidth: "100%",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-        }}
-      >
-        {name}
-      </StyleNameProduct>
+      <div style={{ height: "40px" }}>
+        <StyleNameProduct>{name}</StyleNameProduct>
+      </div>
       <WrapperReportText>
         <span>
           <span style={{ marginRight: "4px" }}>{rating}</span>
@@ -67,10 +63,15 @@ const CardComponent = (props) => {
         <WrapperStyleTextSell> | Đã bán {selled || 0}</WrapperStyleTextSell>
       </WrapperReportText>
       <WrapperPriceText>
-        <span style={{ marginRight: "8px" }}>{convertPrice(price)}</span>
-        {discount !== 0 && (
-          <WrapperDiscountText>{`-${discount || 0}%`}</WrapperDiscountText>
-        )}
+        <span style={{ marginRight: "8px" }}>{convertPrice(afterPrice)}</span>
+        <div style={{ display: "flex", gap: "4px", height: "18px" }}>
+          {discount !== 0 && (
+            <>
+              <WrapperDiscountText>{`-${discount || 0}%`}</WrapperDiscountText>
+              <WrapperPriceBefore>{convertPrice(price)}</WrapperPriceBefore>
+            </>
+          )}
+        </div>
       </WrapperPriceText>
     </WrapperCardStyle>
   );

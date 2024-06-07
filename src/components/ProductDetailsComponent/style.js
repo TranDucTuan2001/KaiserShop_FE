@@ -29,13 +29,14 @@ export const WrapperStyleTextSell = styled.span`
 export const WrapperPriceProduct = styled.div`
   display: flex;
   align-items: center;
-  height: 70px;
+  // height: 70px;
 `;
-export const WrapperPriceTextProduct = styled.h1`
+export const WrapperPriceTextProduct = styled.span`
   font-size: 32px;
   line-height: 40px;
   margin-right: 8px;
   font-weight: 500;
+  color: rgb(255, 66, 78);
 `;
 export const WrapperAddressProduct = styled.div`
   span.address {

@@ -102,6 +102,7 @@ const HomePage = () => {
                     selled={product.selled}
                     discount={product.discount}
                     id={product._id}
+                    afterPrice={product.price-(product.price*product.discount)/100}
                   />
                 );
               })}

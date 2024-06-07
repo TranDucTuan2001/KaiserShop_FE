@@ -57,6 +57,13 @@ export const StyleNameProduct = styled.div`
   font-size: 12px;
   line-height: 16px;
   color: rgb(56, 56, 61);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Số dòng tối đa */
+  -webkit-box-orient: vertical;
+  white-space: normal;
 `;
 export const WrapperReportText = styled.div`
   font-size: 11px;
@@ -72,12 +79,32 @@ export const WrapperPriceText = styled.div`
   font-weight: 500;
 `;
 export const WrapperDiscountText = styled.span`
+  display: flex;
+  padding: 0px 4px;
+  align-items: flex-start;
+  border-radius: 8px;
+  background: var(--Alias-Theme-Variant, #f5f5fa);
+  color: var(--Alias-Primary---On-Theme, #27272a);
+  font-family: Inter;
   font-size: 12px;
-  color: rgb(255, 66, 78);
+  font-style: normal;
   font-weight: 500;
+  line-height: 150%;
+  width: fit-content;
+  height: fit-content;
 `;
 export const WrapperStyleTextSell = styled.span`
   color: rgb(120, 120, 120);
   font-size: 15px;
   line-height: 24px;
+`;
+
+export const WrapperPriceBefore = styled.span`
+  color: var(--Alias-Secondary---On-Theme, #808089);
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  text-decoration-line: line-through;
 `;

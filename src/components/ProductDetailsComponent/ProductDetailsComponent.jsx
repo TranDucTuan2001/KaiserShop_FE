@@ -46,6 +46,7 @@ import ModalComponent from "../ModalComponent/ModalComponent";
 import InputComponent from "../InputComponent/InputComponent";
 import { WrapperAddress, WrapperLocation } from "../../pages/PaymentPage/style";
 import { WrapperChange } from "../../pages/OrderPage/style";
+import { WrapperPriceBefore } from "../CardComponent/style";
 
 const ProductDetailsComponent = ({ idProduct }) => {
   const location = useLocation();
@@ -262,6 +263,10 @@ const ProductDetailsComponent = ({ idProduct }) => {
     setSelectedImage(src);
     setActiveIndex(index);
   };
+  const price = productDetails?.price ?? 0; // Nếu productDetails?.price không tồn tại, sử dụng 0
+  const discount = productDetails?.discount ?? 0; // Nếu productDetails?.discount không tồn tại, sử dụng 0
+
+  const priceAfter = price - (price * discount) / 100;
 
   return (
     <LoadingComponent isLoading={isPending}>
@@ -327,22 +332,30 @@ const ProductDetailsComponent = ({ idProduct }) => {
               | Đã bán {productDetails?.selled}
             </WrapperStyleTextSell>
           </div>
-          <WrapperPriceProduct>
-            <WrapperPriceTextProduct>
-              {convertPrice(productDetails?.price ?? 0)}
-            </WrapperPriceTextProduct>
-            {productDetails?.discount !== 0 && (
-              <WrapperDiscount>{`-${
-                productDetails?.discount ?? 0
-              }%`}</WrapperDiscount>
-            )}
-            <img
-              style={{ height: "25px", margin: "10px", opacity: "1" }}
-              src={HotDeal}
-              alt="Description"
-            />
-          </WrapperPriceProduct>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <WrapperPriceProduct>
+              <WrapperPriceTextProduct>
+                {convertPrice(priceAfter)}
+              </WrapperPriceTextProduct>
 
+              {productDetails?.discount !== 0 && (
+                <WrapperDiscount>{`-${
+                  productDetails?.discount ?? 0
+                }%`}</WrapperDiscount>
+              )}
+
+              <img
+                style={{ height: "25px", margin: "10px", opacity: "1" }}
+                src={HotDeal}
+                alt="Description"
+              />
+            </WrapperPriceProduct>
+            {productDetails?.discount !== 0 && (
+              <WrapperPriceBefore style={{ fontSize: "15px" }}>
+                {convertPrice(productDetails?.price ?? 0)}
+              </WrapperPriceBefore>
+            )}
+          </div>
           {user?.id && (
             <WrapperAddressProduct>
               <div>
@@ -366,13 +379,15 @@ const ProductDetailsComponent = ({ idProduct }) => {
             </WrapperAddressProduct>
           )}
 
-          <LikeButtonComponent
-            dataHref={
-              process.env.REACT_APP_IS_LOCAL === "true"
-                ? "https://developers.facebook.com/docs/plugins/"
-                : window.location.href
-            }
-          ></LikeButtonComponent>
+          <div style={{ marginTop: "20px" }}>
+            <LikeButtonComponent
+              dataHref={
+                process.env.REACT_APP_IS_LOCAL === "true"
+                  ? "https://developers.facebook.com/docs/plugins/"
+                  : window.location.href
+              }
+            ></LikeButtonComponent>
+          </div>
           <div
             style={{
               margin: "10px 0 20px",
@@ -464,17 +479,17 @@ const ProductDetailsComponent = ({ idProduct }) => {
               ></ButtonComponent>
             </div>
           </div>
-         {productDetails?.description &&(
-           <WrapperDescriptionArea>
-           <WrapperDescription>Mô tả sản phẩm</WrapperDescription>
-           <WrapperDescriptionText isExpanded={isExpanded}>
-             {productDetails?.description}
-           </WrapperDescriptionText>
-           <ShowMoreButton onClick={toggleExpand}>
-             {isExpanded ? "Thu gọn" : "Xem thêm"}
-           </ShowMoreButton>
-         </WrapperDescriptionArea>
-         )}
+          {productDetails?.description && (
+            <WrapperDescriptionArea>
+              <WrapperDescription>Mô tả sản phẩm</WrapperDescription>
+              <WrapperDescriptionText isExpanded={isExpanded}>
+                {productDetails?.description}
+              </WrapperDescriptionText>
+              <ShowMoreButton onClick={toggleExpand}>
+                {isExpanded ? "Thu gọn" : "Xem thêm"}
+              </ShowMoreButton>
+            </WrapperDescriptionArea>
+          )}
         </Col>
         <CommentComponent
           dataHref={
