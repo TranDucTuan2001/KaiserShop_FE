@@ -35,8 +35,10 @@ export const WrapperPriceTextProduct = styled.span`
   font-size: 32px;
   line-height: 40px;
   margin-right: 8px;
-  font-weight: 500;
+  font-weight: 600;
   color: rgb(255, 66, 78);
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  
 `;
 export const WrapperAddressProduct = styled.div`
   span.address {

@@ -3,6 +3,7 @@ import {
   StyleNameProduct,
   WrapperCardStyle,
   WrapperImageStyle,
+  WrapperPriceAfter,
   WrapperPriceBefore,
   WrapperStyleTextSell,
 } from "./style";
@@ -63,7 +64,7 @@ const CardComponent = (props) => {
         <WrapperStyleTextSell> | Đã bán {selled || 0}</WrapperStyleTextSell>
       </WrapperReportText>
       <WrapperPriceText>
-        <span style={{ marginRight: "8px" }}>{convertPrice(afterPrice)}</span>
+        <WrapperPriceAfter style={{ marginRight: "8px" }}>{convertPrice(afterPrice)}</WrapperPriceAfter>
         <div style={{ display: "flex", gap: "4px", height: "18px" }}>
           {discount !== 0 && (
             <>

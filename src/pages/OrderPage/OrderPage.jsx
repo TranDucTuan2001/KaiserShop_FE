@@ -427,7 +427,7 @@ const OrderPage = () => {
                         style={{
                           color: "rgb(255, 66, 78)",
                           fontSize: "13px",
-                          fontWeight: 500,
+                          fontWeight: 600,
                         }}
                       >
                         {convertPrice(

@@ -108,3 +108,10 @@ export const WrapperPriceBefore = styled.span`
   line-height: 150%;
   text-decoration-line: line-through;
 `;
+
+export const WrapperPriceAfter = styled.span`
+  line-height: 150%;
+  font-weight: 600;
+  box-sizing: border-box;
+  font-family: Inter, Helvetica, Arial, sans-serif;
+`;
