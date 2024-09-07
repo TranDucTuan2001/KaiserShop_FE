@@ -12,6 +12,7 @@ import { WrapperFooterItem, WrapperListOrder } from "./style";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMutationHooks } from "../../hooks/useMutationHook";
 import * as message from "../../components/MesageComponent/MesageComponent";
+import { ExceptionOutlined } from "@ant-design/icons";
 
 const MyOrderPage = () => {
   const navigate = useNavigate();
@@ -154,7 +155,7 @@ const MyOrderPage = () => {
 
   return (
     <LoadingComponent isLoading={isLoading || mutation.isPending}>
-      <div style={{ background: "#efefef", with: "100%" }}>
+      <div style={{ background: "#efefef", width: "100%" }}>
         <WrapperContainer>
           <div style={{ height: "100%", width: "1270px", margin: "0 auto" }}>
             <h2
@@ -169,9 +170,9 @@ const MyOrderPage = () => {
                 paddingBottom: "15px",
               }}
             >
-              <WrapperListOrder>
-                {dataOrder?.map((order) => {
-                  return (
+              {dataOrder && dataOrder.length > 0 ? (
+                <WrapperListOrder>
+                  {dataOrder.map((order) => (
                     <WrapperMyItemOrder key={order?._id}>
                       <WrapperInfo>
                         <span style={{ fontSize: "14px", fontWeight: "bold" }}>
@@ -186,11 +187,11 @@ const MyOrderPage = () => {
                               color: "rgb(90, 32, 193)",
                               fontWeight: "bold",
                             }}
-                          >{`${
-                            order.isDelivered
+                          >
+                            {order.isDelivered
                               ? "Đã giao hàng"
-                              : "Chưa giao hàng"
-                          }`}</span>
+                              : "Chưa giao hàng"}
+                          </span>
                         </div>
                         <div>
                           <span style={{ color: "rgb(255, 66, 78)" }}>
@@ -201,13 +202,12 @@ const MyOrderPage = () => {
                               color: "rgb(90, 32, 193)",
                               fontWeight: "bold",
                             }}
-                          >{`${
-                            order.isPaid ? "Đã thanh toán" : "Chưa thanh toán"
-                          }`}</span>
+                          >
+                            {order.isPaid ? "Đã thanh toán" : "Chưa thanh toán"}
+                          </span>
                         </div>
                       </WrapperInfo>
-                      <div> {renderProduct(order?.orderItems)}</div>
-
+                      <div>{renderProduct(order?.orderItems)}</div>
                       <WrapperFooterItem>
                         <div>
                           <span
@@ -261,7 +261,7 @@ const MyOrderPage = () => {
                               color: "#9255FD",
                               fontSize: "14px",
                             }}
-                          ></ButtonComponent>
+                          />
                           <ButtonComponent
                             onClick={() => handleDetailsOrder(order?._id)}
                             size={40}
@@ -275,14 +275,20 @@ const MyOrderPage = () => {
                               color: "#9255FD",
                               fontSize: "14px",
                             }}
-                          ></ButtonComponent>
+                          />
                         </div>
                       </WrapperFooterItem>
                     </WrapperMyItemOrder>
-                  );
-                })}
-              </WrapperListOrder>
-              <div style={{ height: "600px" }}></div>
+                  ))}
+                </WrapperListOrder>
+              ) : (
+                <div style={{ textAlign: "center", padding: "50px 0" }}>
+                  <h3 style={{ fontSize: "25px" }}>
+                    <ExceptionOutlined />
+                    Đơn hàng trống
+                  </h3>
+                </div>
+              )}
             </div>
           </div>
         </WrapperContainer>

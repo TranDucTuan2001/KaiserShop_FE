@@ -10,6 +10,9 @@ import {
   UserOutlined,
   CaretDownOutlined,
   ShoppingCartOutlined,
+  FileDoneOutlined,
+  PoweroffOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import { Badge } from "antd";
 import ButtonInputSearch from "../ButtonInputSearch/ButtonInputSearch";
@@ -54,18 +57,18 @@ const HeaderComponent = ({ isHiddenSearch, isHiddenCard }) => {
   const content = (
     <div>
       <WrapperContentPopup onClick={() => handleClickNavigate("profile")}>
-        Thông tin người dùng
+      <UserOutlined /> Thông tin người dùng
+      </WrapperContentPopup>
+      <WrapperContentPopup onClick={() => handleClickNavigate("my-order")}>
+      <FileDoneOutlined /> Đơn hàng của tôi
       </WrapperContentPopup>
       {user?.isAdmin && (
         <WrapperContentPopup onClick={() => handleClickNavigate("admin")}>
-          Quản lí hệ thống
+          <SettingOutlined /> Quản lí hệ thống
         </WrapperContentPopup>
       )}
-      <WrapperContentPopup onClick={() => handleClickNavigate("my-order")}>
-        Đơn hàng của tôi
-      </WrapperContentPopup>
       <WrapperContentPopup onClick={() => handleClickNavigate()}>
-        Đăng xuất
+      <PoweroffOutlined /> Đăng xuất
       </WrapperContentPopup>
     </div>
   );
