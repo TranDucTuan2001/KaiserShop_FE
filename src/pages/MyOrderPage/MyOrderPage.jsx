@@ -48,7 +48,6 @@ const MyOrderPage = () => {
   });
 
   const handleCanceOrder = (order) => {
-    console.log("tokeen", state?.token);
     mutation.mutate(
       {
         access_token: state?.token,
