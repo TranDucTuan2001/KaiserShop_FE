@@ -30,6 +30,7 @@ export const getDetailsOrder = async (id,orderId,access_token) => {
 };
 
 export const cancelsOrder = async (access_token, orderId, id, orderItems) => {
+  // console.log("acccstoken", access_token);
   const res = await axiosJWT.delete(`${process.env.REACT_APP_API_URL}/order/cancel-order/${id}&${orderId}`,{data:orderItems},{
       headers: {
         token: `Bearer ${access_token}`,
