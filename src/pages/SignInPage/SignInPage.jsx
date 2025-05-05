@@ -190,7 +190,9 @@ const SignInPage = () => {
             ></ButtonComponent>
           </LoadingComponent>
           <p>
-            <WrapperTextLight>Quên mật khẩu?</WrapperTextLight>{" "}
+            <WrapperTextLight onClick={() => navigate("/forgot-password")}>
+              Quên mật khẩu?
+            </WrapperTextLight>{" "}
           </p>
           <p style={{ margin: 0 }}>
             <CreateAccout>Chưa có tài khoản?</CreateAccout>
